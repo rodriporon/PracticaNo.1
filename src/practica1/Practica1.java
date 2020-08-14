@@ -112,7 +112,7 @@ public class Practica1 {
         matriz = new int[a][b];
         int ubi = 0, pos = 0, gg = 0;
         for (int i = 0; i < a; i++) {
-            for (int j = 0; i < b; j++) {
+            for (int j = 0; j < b; j++) {
                 matriz[i][j] = noC[ubi];
                 ubi++;
                 pos++;
