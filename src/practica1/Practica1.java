@@ -87,6 +87,9 @@ public class Practica1 {
         } else if (contador % 17 == 0) {
             b = contador / 17;
             a = contador / b;
+        } else if (contador % 19 ==0) {
+            b = contador / 19;
+            a = contador / b;
         } else {
             System.out.println("La frase excede el límite de carácteres");
         }
@@ -121,12 +124,20 @@ public class Practica1 {
 			//Las siguientes lineas son filas de la matriz
 
 			linea = br.readLine();
+                        
+                        //Verificar que la matriz es cuadrada del multiplo
+                        String[] verificar = linea.split(",");
+                        if (verificar.length != a) {
+                            System.out.println("Ingrese una matriz cuadrada");
+                            System.out.println(verificar.length);
+                    } else {
+                            
+                        
 
 			int fila = 0; //Para recorrer las filas de la matriz
-
+                            
 			while(linea != null) {
-				String[] enteros = linea.split(",");
-
+				String[] enteros = linea.split(",");                                
                         	for (int i = 0; i < enteros.length; i++)
                                     matrizL[fila][i] = Integer.parseInt(enteros[i]);
 				fila++;
@@ -134,7 +145,8 @@ public class Practica1 {
 
 			}
 			br.close();
- 
+                        
+                        
 			//Mostramos la matriz leída
 			for (int i = 0; i < longitud; i++) {
 
@@ -145,6 +157,7 @@ public class Practica1 {
 				System.out.println();
 
 			}
+                        }
 
 		} catch (FileNotFoundException e) {
 
@@ -163,12 +176,14 @@ public class Practica1 {
 			System.out.println("Error accediendo al archivo.");
 
 			e.printStackTrace();
+                        
 
 		}
 
  
 
 	}
+    
 
     
     public static boolean Primo(int numero){
