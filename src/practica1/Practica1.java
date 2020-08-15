@@ -58,6 +58,7 @@ public class Practica1 {
     }
     
     public static void Cifrado(String fraseC){
+        Scanner cadenas = new Scanner(System.in);
         int matriz[][];
         int contador = 0;
         char[] caracteresC = fraseC.toCharArray();
@@ -107,11 +108,13 @@ public class Practica1 {
         }
         System.out.println(Arrays.deepToString(matriz));
         System.out.println("La matriz es multiplo de: " + a + " y n es: " + b);
-        
-                int[][] matrizL;
+                
+                String direcc;
+                int[][] matrizL = null;
 		try {
-
-			BufferedReader br = new BufferedReader(new FileReader("archivos/matriz.txt"));
+                        System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
+                        direcc = cadenas.nextLine();
+			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc));
 
 			//Primera linea nos dice longitud de la matriz
 
@@ -180,9 +183,29 @@ public class Practica1 {
 
 		}
 
- 
+    int[][] c = Multiplicacion(matrizL, matriz);
+    System.out.println(Arrays.deepToString(c));
 
 	}
+    
+public static int[][] Multiplicacion(int[][] a, int[][] b) {
+    int[][] c = new int[a.length][b[0].length];
+    // se comprueba si las matrices se pueden multiplicar
+    if (a[0].length == b.length) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                for (int k = 0; k < a[0].length; k++) {
+                    // aquí se multiplica la matriz
+                    c[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+    }
+    /**
+     * si no se cumple la condición se retorna una matriz vacía
+     */
+    return c;
+}   
     
 
     
