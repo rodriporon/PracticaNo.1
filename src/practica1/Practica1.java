@@ -1,7 +1,14 @@
 package practica1;
-import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Practica1 {
 
@@ -27,33 +34,7 @@ public class Practica1 {
                     frase = cadenas.nextLine();
                     caracteres = frase.toCharArray();
                     Cifrado(frase);
-                    //Multiplo(caracteres.length);
-                    /*int contador = caracteres.length;
-                    int a = 1;
-                    int b = 1;
-                    if (contador % 3 == 0) {
-                        b = contador / 3;   
-                        a = contador / b;
-                    } else if (contador % 4 == 0) {
-                        b = contador / 4;
-                        a = contador / b;
-                    } else if (contador % 5 == 0) {
-                        b = contador / 5;
-                        a = contador / b;
-                    } else if (contador % 7 == 0) {
-                        b = contador / 7;
-                        a = contador / b;
-                    } else if (contador % 11 == 0) {
-                        b = contador / 11;
-                        a = contador / b;
-                    } else if (contador % 17 == 0) {
-                        b = contador / 17;
-                        a = contador / b;
-                    } else {
-                        System.out.println("La frase excede el límite de carácteres");
-                    }
-                    System.out.println("El multiplo es: " + a + " y n es: " + b); */
-                    
+                                     
 
                     System.out.println("Son " + caracteres.length + " caracteres");
                     
@@ -106,6 +87,8 @@ public class Practica1 {
         } else if (contador % 17 == 0) {
             b = contador / 17;
             a = contador / b;
+        } else {
+            System.out.println("La frase excede el límite de carácteres");
         }
         System.out.println("El multiplo es: " + a + " y n es: " + b);
         
@@ -113,7 +96,7 @@ public class Practica1 {
         int ubi = 0, pos = 0, gg = 0;
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < b; j++) {
-                matriz[i][j] = noC[ubi];
+                matriz[i][j] = noC[ubi];    
                 ubi++;
                 pos++;
             }
@@ -122,7 +105,72 @@ public class Practica1 {
         System.out.println(Arrays.deepToString(matriz));
         System.out.println("La matriz es multiplo de: " + a + " y n es: " + b);
         
-    }
+                int[][] matrizL;
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader("archivos/matriz.txt"));
+
+			//Primera linea nos dice longitud de la matriz
+
+			String linea = Integer.toString(a);
+
+			int longitud = Integer.parseInt(linea);
+
+			matrizL = new int[longitud][longitud];
+
+			//Las siguientes lineas son filas de la matriz
+
+			linea = br.readLine();
+
+			int fila = 0; //Para recorrer las filas de la matriz
+
+			while(linea != null) {
+				String[] enteros = linea.split(",");
+
+                        	for (int i = 0; i < enteros.length; i++)
+                                    matrizL[fila][i] = Integer.parseInt(enteros[i]);
+				fila++;
+				linea = br.readLine();
+
+			}
+			br.close();
+ 
+			//Mostramos la matriz leída
+			for (int i = 0; i < longitud; i++) {
+
+				for (int j = 0; j < longitud; j++)
+
+					System.out.print(matrizL[i][j] + " ");
+
+				System.out.println();
+
+			}
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("No se encuentra archivo");
+
+			e.printStackTrace();
+
+		} catch (NumberFormatException e) {
+
+			System.out.println("No se pudo convertir a entero");
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			System.out.println("Error accediendo al archivo.");
+
+			e.printStackTrace();
+
+		}
+
+ 
+
+	}
+
+    
     public static boolean Primo(int numero){
         int contadorP = 2;
         boolean primo = true;
@@ -160,53 +208,36 @@ public class Practica1 {
         System.out.println("El multiplo es: " + a + " y n es: " + b);
     }
     
-    
-    public static void LeerDocumento(){
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
+    public static void LeerP(String direccion, String texto){
         try {
-            archivo = new File ("archivos/texto.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-            
-            String linea;
-            while((linea=br.readLine())!=null)
-                System.out.println(linea);
-        }
-        catch(Exception e){
+            PrintWriter writer = new PrintWriter(direccion, "UTF-8");
+            writer.println("Primera línea");
+            writer.println("Segunda línea");
+            writer.println(texto);
+            writer.close();
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-            try{
-                if (null != fr) {
-                    fr.close();
-                } 
-            }catch (Exception e2){
-                e2.printStackTrace();
-            }
         }
     }
     
-    public static void EscribirDocumento(){
-        FileWriter fichero = null;
-        PrintWriter pw = null;
+    public static String Leer(String dire){
+        String txt = "";
+        int a = 0;
         try{
-            fichero = new FileWriter("Archivos/texto.txt");
-            pw = new PrintWriter(fichero);
-            
-            for (int i = 0; i < 10; i++) {
-                pw.println("Linea " + i);
+            BufferedReader bf = new BufferedReader(new FileReader (dire));
+            String temp ="";
+            String bfRead;
+            while((bfRead = bf.readLine()) != null){
+                temp = temp + bfRead;
+                a++;
             }
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2){
-                e2.printStackTrace();
-            }
+            txt=temp;
+        }catch(Exception e){
+            System.err.println("No se encontró el archivo");
         }
+        
+        return (txt + "," + a);
     }
+    
+    
 }
