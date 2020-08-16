@@ -114,52 +114,47 @@ public class Practica1 {
       catch(Exception e){
          e.printStackTrace();
       }
-        String direccion2;
+        String direccion2,mat1="";
+        int [][] matriz;
+        int aa= 0;
         try {
-         System.out.print("Ingrese la dirección de la matriz cuadrada (sin la extensión): ");
-         direccion2 = cadenas.nextLine();
-         File archivo = new File ("archivos/" + direccion2 + ".txt");
-         FileReader fr = new FileReader (archivo);
-         BufferedReader br = new BufferedReader(fr);
-
-         String linea;
-         int [][] matriz;
-         int filas = 0;
-         int columnas = 0;
-         String cadena_archivo = "";
-         while((linea = br.readLine()) != null){
-            String [] fila = linea.split(",");
-            cadena_archivo += linea + "\n";
-            for(int i = 0; i < fila.length; i++){
-                System.out.print(fila[i] + " ");
+            String texto = "";
+            System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
+            direccion2 = cadenas.nextLine();
+            BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion2+".txt"));
+            String bfRead;
+            String temp ="";
+            while((bfRead = br.readLine()) != null){
+                temp = temp + bfRead;
+                aa++;
             }
-            columnas = fila.length;
-            filas = filas + 1;
-         }
-            System.out.println("");
-          System.out.println("Las columnas son: " + columnas);
-          System.out.println("Las filas son: " + filas);
-      fr.close();
-
-      matriz = new int[filas][columnas];
-          System.out.println("");
-
-          System.out.println(cadena_archivo);
-      
+            texto=temp;
+            br.close();
+            mat1=texto;
       }
       catch(Exception e){
          e.printStackTrace();
       }
-        
-        System.out.print("Ingrese la dimensión de la matriz cuadrada: ");
-            int n = entrada.nextInt();
-            double a[][]= new double[n][n];
-            System.out.print("Ingrese los elementos de la matriz: ");
-            for(int i=0; i<n; i++)
-                for(int j=0; j<n; j++)
-                    a[i][j] = entrada.nextDouble();
+      String[] textElements = mat1.split(",");
+      System.out.println("Segunda  matriz " + Arrays.deepToString(textElements));
+      int [] matri2= new int [textElements.length] ;
+      for (int i = 0; i<textElements.length;i++){
+          matri2[i] = Integer.valueOf(textElements[i]);
+      }
+        //-----------------------------------------------------------------------------------------------------------------------
+        //System.out.print("Ingrese la dimensión de la matriz cuadrada: ");
+            int n =(textElements.length/aa),cc=0;
+             double a[][]= new double[n][n];
+            //System.out.print("Ingrese los elementos de la matriz: ");
+            for(int i=0; i<n; i++){
+                for(int j=0; j<n; j++){
+                    a[i][j] = matri2[cc];
+                    System.out.print(a[i][j]+"  ");
+                    cc++;
+                } System.out.println();
+            }
             double d[][] = multmenos(a);
-
+            
             System.out.println("La inversa de la matriz es: ");
 
             for (int i=0; i<n; ++i) {
@@ -171,7 +166,7 @@ public class Practica1 {
             }
             entrada.close();
         }	
-
+       //-----------------------------------------------------------------------------------------------------------------------------------
 
         public static double[][] multmenos(double a[][])         {
 
@@ -258,7 +253,7 @@ public class Practica1 {
             }
         
     }
-    
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void Cifrado(String fraseC){
         Scanner cadenas = new Scanner(System.in);
         int matriz[][];
