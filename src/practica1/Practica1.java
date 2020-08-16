@@ -56,6 +56,7 @@ public class Practica1 {
     
     public static void Descifrado(){
         Scanner cadenas = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
         String direccion;
         try {
          // Apertura del fichero y creacion de BufferedReader para poder
@@ -115,61 +116,147 @@ public class Practica1 {
       }
         String direccion2;
         try {
-         // Apertura del fichero y creacion de BufferedReader para poder
-         // hacer una lectura comoda (disponer del metodo readLine()).
          System.out.print("Ingrese la dirección de la matriz cuadrada (sin la extensión): ");
          direccion2 = cadenas.nextLine();
          File archivo = new File ("archivos/" + direccion2 + ".txt");
          FileReader fr = new FileReader (archivo);
          BufferedReader br = new BufferedReader(fr);
 
-         // Lectura del archivo
          String linea;
-         // Matriz para guardar lo que viene en el archivo.txt
          int [][] matriz;
          int filas = 0;
          int columnas = 0;
-         // Variable para guardar la cadena como tal
          String cadena_archivo = "";
-         // La matriz va a tener la misma cantidad de columnas por fila.
-         // Con un split podemos separar un string por un caracter 
-         // en especifico, en este caso sabemo que vienen con ","
-         while((linea=br.readLine())!=null){
+         while((linea = br.readLine()) != null){
             String [] fila = linea.split(",");
-            // Ahora fila es un vector de tipo String
-            // Separados por comas.
-            // En esta variable se esta replicando el contenido
-            // Del archivo y en mi caso utilizare un salto de linea
             cadena_archivo += linea + "\n";
-            // Si imprimimos este vector tendremos la fila separada por comas
             for(int i = 0; i < fila.length; i++){
                 System.out.print(fila[i] + " ");
             }
-            // Luego de imprimir la fila, podemos darnos cuenta que
-            // El tamaño del arreglo es igual a la cantidad de columnas
-            // entonces
             columnas = fila.length;
-            // En este caso estaremos leyendo linea por linea
-            // Por cada linea, la fila aumenta en 1 y al terminar
-            // de leer el archivo, filas tendira la cantidad total
-            // de filas en el archivo, justo para la matriz.
             filas = filas + 1;
          }
             System.out.println("");
           System.out.println("Las columnas son: " + columnas);
           System.out.println("Las filas son: " + filas);
       fr.close();
-      // Con las dimensiones que encontramos, podemos definir nuestra matriz
+
       matriz = new int[filas][columnas];
           System.out.println("");
-      // Hasta este punto tenemos la matriz del tamaño del archivo
-      // Y tambien tenemos una variable con el contenido del archivo
+
           System.out.println(cadena_archivo);
       
       }
       catch(Exception e){
          e.printStackTrace();
       }
+        
+        System.out.print("Ingrese la dimensión de la matriz cuadrada: ");
+            int n = entrada.nextInt();
+            double a[][]= new double[n][n];
+            System.out.print("Ingrese los elementos de la matriz: ");
+            for(int i=0; i<n; i++)
+                for(int j=0; j<n; j++)
+                    a[i][j] = entrada.nextDouble();
+            double d[][] = multmenos(a);
+
+            System.out.println("La inversa de la matriz es: ");
+
+            for (int i=0; i<n; ++i) {
+                for (int j=0; j<n; ++j)
+
+                {System.out.print(d[i][j]+"  ");}
+
+                System.out.println();
+            }
+            entrada.close();
+        }	
+
+
+        public static double[][] multmenos(double a[][])         {
+
+            int n = a.length;
+            double x[][] = new double[n][n];
+            double b[][] = new double[n][n];
+            int index[] = new int[n];
+            for (int i=0; i<n; ++i)
+                b[i][i] = 1;
+
+     //La funcion triangulo convierte la matriz en un triángulo para resolver por gauss
+
+            trianguloGauss(a, index);
+
+     // Ingresamos los cocientes de la matriz
+            for (int i=0; i<n-1; ++i)
+                for (int j=i+1; j<n; ++j)
+                    for (int k=0; k<n; ++k)
+                        b[index[j]][k]
+                        	    -= a[index[j]][i]*b[index[i]][k];
+
+     
+     // Aplicamos sustituciones
+            for (int i=0; i<n; ++i)             {
+                x[n-1][i] = b[index[n-1]][i]/a[index[n-1]][n-1];
+                for (int j=n-2; j>=0; --j)                 {
+                    x[j][i] = b[index[j]][i];
+                    for (int k=j+1; k<n; ++k)
+                    {
+                        x[j][i] -= a[index[j]][k]*x[k][i];
+                    }
+
+                    x[j][i] /= a[index[j]][j];
+                }
+            }
+            return x;
+        }
+
+    // Utilizamos un pivote para el método de gauss
+
+        public static void trianguloGauss(double a[][], int index[])  {
+
+            int n = index.length;
+            double c[] = new double[n];
+            for (int i=0; i<n; ++i)
+                index[i] = i;
+
+     // Acá encontramos los factores reescalando fila por fila
+            for (int i=0; i<n; ++i) {
+                double c1 = 0;
+                for (int j=0; j<n; ++j) {
+                    double c0 = Math.abs(a[i][j]);
+                    if (c0 > c1) c1 = c0;
+                }
+                c[i] = c1;
+            }
+
+     // Buscamos los pivotes por cada columna
+            int k = 0;
+            for (int j=0; j<n-1; ++j) {
+                double pi1 = 0;
+                for (int i=j; i<n; ++i)  {
+                    double pi0 = Math.abs(a[index[i]][j]);
+                    pi0 /= c[index[i]];
+                    if (pi0 > pi1) {
+                        pi1 = pi0;
+                        k = i;
+                    }
+                }
+
+       // Intercambiamos filas por el orden del pivote 
+                int itmp = index[j];
+                index[j] = index[k];
+                index[k] = itmp;
+                for (int i=j+1; i<n; ++i) {
+                    double pj = a[index[i]][j]/a[index[j]][j];
+
+     // Registrar los cocientes de los pivotes por debajo de la diagonal
+                    a[index[i]][j] = pj;
+                    
+                    for (int l=j+1; l<n; ++l)
+                        a[index[i]][l] -= pj*a[index[j]][l];
+                }
+            }
+        
     }
     
     public static void Cifrado(String fraseC){
