@@ -38,6 +38,7 @@ public class Practica1 {
                     break;
                 case 2:
                     System.out.println("DESCIFRAR");
+                    Descifrado();
                     break;
                 case 3:
                     System.out.println("GAUSS-JORDAN");
@@ -55,59 +56,120 @@ public class Practica1 {
     
     public static void Descifrado(){
         Scanner cadenas = new Scanner(System.in);
-        String direcc;
-                int[][] matrizL = null;
-		try {
-                        System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
-                        direcc = cadenas.nextLine();
-			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc));
-                        String casillas = null;
-                        String[] verificar = casillas.split(",");
-			//Primera linea nos dice longitud de la matriz
-			String linea = Integer.toString(verificar.length);
-                        System.out.println("La matriz ingresada es de ");
-                        
-                        
-                        /*
-			int longitud = Integer.parseInt(linea);
-			matrizL = new int[longitud][longitud];
-			//Las siguientes lineas son filas de la matriz
-			linea = br.readLine();
-                        //Verificar que la matriz es cuadrada del multiplo
+        String direccion;
+        try {
+         // Apertura del fichero y creacion de BufferedReader para poder
+         // hacer una lectura comoda (disponer del metodo readLine()).
+         System.out.print("Ingrese la dirección de la matriz a descifrar (sin la extensión): ");
+         direccion = cadenas.nextLine();
+         File archivo = new File ("archivos/" + direccion + ".txt");
+         FileReader fr = new FileReader (archivo);
+         BufferedReader br = new BufferedReader(fr);
 
-                        if (verificar.length != a) {
-                            System.out.println("Ingrese una matriz cuadrada");
-                            System.out.println(verificar.length);
-                    } else {
-			int fila = 0; //Para recorrer las filas de la matriz
-			while(linea != null) {
-                            String[] enteros = linea.split(",");                                
-                        	for (int i = 0; i < enteros.length; i++)
-                                matrizL[fila][i] = Integer.parseInt(enteros[i]);
-				fila++;
-				linea = br.readLine();
-			}
-			br.close();
-			//Mostramos la matriz leída
-			for (int i = 0; i < longitud; i++) {
-				for (int j = 0; j < longitud; j++)
-                                    System.out.print(matrizL[i][j] + " ");
-                                    System.out.println();
-			}
-                    } */
-		} catch (FileNotFoundException e) {
-			System.out.println("No se encuentra archivo");
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			System.out.println("No se pudo convertir a entero");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Error accediendo al archivo");
-			e.printStackTrace();     
-		}
+         // Lectura del archivo
+         String linea;
+         // Matriz para guardar lo que viene en el archivo.txt
+         int [][] matriz;
+         int filas = 0;
+         int columnas = 0;
+         // Variable para guardar la cadena como tal
+         String cadena_archivo = "";
+         // La matriz va a tener la misma cantidad de columnas por fila.
+         // Con un split podemos separar un string por un caracter 
+         // en especifico, en este caso sabemo que vienen con ","
+         while((linea=br.readLine())!=null){
+            String [] fila = linea.split(",");
+            // Ahora fila es un vector de tipo String
+            // Separados por comas.
+            // En esta variable se esta replicando el contenido
+            // Del archivo y en mi caso utilizare un salto de linea
+            cadena_archivo += linea + "\n";
+            // Si imprimimos este vector tendremos la fila separada por comas
+            for(int i = 0; i < fila.length; i++){
+                System.out.print(fila[i] + " ");
+            }
+            // Luego de imprimir la fila, podemos darnos cuenta que
+            // El tamaño del arreglo es igual a la cantidad de columnas
+            // entonces
+            columnas = fila.length;
+            // En este caso estaremos leyendo linea por linea
+            // Por cada linea, la fila aumenta en 1 y al terminar
+            // de leer el archivo, filas tendira la cantidad total
+            // de filas en el archivo, justo para la matriz.
+            filas = filas + 1;
+         }
+            System.out.println("");
+          System.out.println("Las columnas son: " + columnas);
+          System.out.println("Las filas son: " + filas);
+      fr.close();
+      // Con las dimensiones que encontramos, podemos definir nuestra matriz
+      matriz = new int[filas][columnas];
+          System.out.println("");
+      // Hasta este punto tenemos la matriz del tamaño del archivo
+      // Y tambien tenemos una variable con el contenido del archivo
+          System.out.println(cadena_archivo);
+      
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }
+        String direccion2;
+        try {
+         // Apertura del fichero y creacion de BufferedReader para poder
+         // hacer una lectura comoda (disponer del metodo readLine()).
+         System.out.print("Ingrese la dirección de la matriz cuadrada (sin la extensión): ");
+         direccion2 = cadenas.nextLine();
+         File archivo = new File ("archivos/" + direccion2 + ".txt");
+         FileReader fr = new FileReader (archivo);
+         BufferedReader br = new BufferedReader(fr);
 
-
-        
+         // Lectura del archivo
+         String linea;
+         // Matriz para guardar lo que viene en el archivo.txt
+         int [][] matriz;
+         int filas = 0;
+         int columnas = 0;
+         // Variable para guardar la cadena como tal
+         String cadena_archivo = "";
+         // La matriz va a tener la misma cantidad de columnas por fila.
+         // Con un split podemos separar un string por un caracter 
+         // en especifico, en este caso sabemo que vienen con ","
+         while((linea=br.readLine())!=null){
+            String [] fila = linea.split(",");
+            // Ahora fila es un vector de tipo String
+            // Separados por comas.
+            // En esta variable se esta replicando el contenido
+            // Del archivo y en mi caso utilizare un salto de linea
+            cadena_archivo += linea + "\n";
+            // Si imprimimos este vector tendremos la fila separada por comas
+            for(int i = 0; i < fila.length; i++){
+                System.out.print(fila[i] + " ");
+            }
+            // Luego de imprimir la fila, podemos darnos cuenta que
+            // El tamaño del arreglo es igual a la cantidad de columnas
+            // entonces
+            columnas = fila.length;
+            // En este caso estaremos leyendo linea por linea
+            // Por cada linea, la fila aumenta en 1 y al terminar
+            // de leer el archivo, filas tendira la cantidad total
+            // de filas en el archivo, justo para la matriz.
+            filas = filas + 1;
+         }
+            System.out.println("");
+          System.out.println("Las columnas son: " + columnas);
+          System.out.println("Las filas son: " + filas);
+      fr.close();
+      // Con las dimensiones que encontramos, podemos definir nuestra matriz
+      matriz = new int[filas][columnas];
+          System.out.println("");
+      // Hasta este punto tenemos la matriz del tamaño del archivo
+      // Y tambien tenemos una variable con el contenido del archivo
+          System.out.println(cadena_archivo);
+      
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }
     }
     
     public static void Cifrado(String fraseC){
