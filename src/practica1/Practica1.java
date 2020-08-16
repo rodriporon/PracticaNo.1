@@ -24,7 +24,6 @@ public class Practica1 {
             System.out.println("4. Salir");
             System.out.print("Ingrese una opción: ");
             opcion = sc.nextInt();
-            
             switch (opcion) {
                 case 1:
                     String frase;
@@ -34,10 +33,7 @@ public class Practica1 {
                     frase = cadenas.nextLine();
                     caracteres = frase.toCharArray();
                     Cifrado(frase);
-                                     
-
                     System.out.println("Son " + caracteres.length + " caracteres");
-                    
                     System.out.println("Tu frase es: " + frase);
                     break;
                 case 2:
@@ -55,6 +51,63 @@ public class Practica1 {
         
         //EscribirDocumento();
         //LeerDocumento();
+    }
+    
+    public static void Descifrado(){
+        Scanner cadenas = new Scanner(System.in);
+        String direcc;
+                int[][] matrizL = null;
+		try {
+                        System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
+                        direcc = cadenas.nextLine();
+			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc));
+                        String casillas = null;
+                        String[] verificar = casillas.split(",");
+			//Primera linea nos dice longitud de la matriz
+			String linea = Integer.toString(verificar.length);
+                        System.out.println("La matriz ingresada es de ");
+                        
+                        
+                        /*
+			int longitud = Integer.parseInt(linea);
+			matrizL = new int[longitud][longitud];
+			//Las siguientes lineas son filas de la matriz
+			linea = br.readLine();
+                        //Verificar que la matriz es cuadrada del multiplo
+
+                        if (verificar.length != a) {
+                            System.out.println("Ingrese una matriz cuadrada");
+                            System.out.println(verificar.length);
+                    } else {
+			int fila = 0; //Para recorrer las filas de la matriz
+			while(linea != null) {
+                            String[] enteros = linea.split(",");                                
+                        	for (int i = 0; i < enteros.length; i++)
+                                matrizL[fila][i] = Integer.parseInt(enteros[i]);
+				fila++;
+				linea = br.readLine();
+			}
+			br.close();
+			//Mostramos la matriz leída
+			for (int i = 0; i < longitud; i++) {
+				for (int j = 0; j < longitud; j++)
+                                    System.out.print(matrizL[i][j] + " ");
+                                    System.out.println();
+			}
+                    } */
+		} catch (FileNotFoundException e) {
+			System.out.println("No se encuentra archivo");
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			System.out.println("No se pudo convertir a entero");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Error accediendo al archivo");
+			e.printStackTrace();     
+		}
+
+
+        
     }
     
     public static void Cifrado(String fraseC){
@@ -117,70 +170,42 @@ public class Practica1 {
 			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc));
 
 			//Primera linea nos dice longitud de la matriz
-
 			String linea = Integer.toString(a);
-
 			int longitud = Integer.parseInt(linea);
-
 			matrizL = new int[longitud][longitud];
-
 			//Las siguientes lineas son filas de la matriz
-
 			linea = br.readLine();
-                        
                         //Verificar que la matriz es cuadrada del multiplo
                         String[] verificar = linea.split(",");
                         if (verificar.length != a) {
                             System.out.println("Ingrese una matriz cuadrada");
                             System.out.println(verificar.length);
                     } else {
-                            
-                        
-
 			int fila = 0; //Para recorrer las filas de la matriz
-                            
 			while(linea != null) {
-				String[] enteros = linea.split(",");                                
+                            String[] enteros = linea.split(",");                                
                         	for (int i = 0; i < enteros.length; i++)
-                                    matrizL[fila][i] = Integer.parseInt(enteros[i]);
+                                matrizL[fila][i] = Integer.parseInt(enteros[i]);
 				fila++;
 				linea = br.readLine();
-
 			}
 			br.close();
-                        
-                        
 			//Mostramos la matriz leída
 			for (int i = 0; i < longitud; i++) {
-
 				for (int j = 0; j < longitud; j++)
-
-					System.out.print(matrizL[i][j] + " ");
-
-				System.out.println();
-
+                                    System.out.print(matrizL[i][j] + " ");
+                                    System.out.println();
 			}
-                        }
-
+                    }
 		} catch (FileNotFoundException e) {
-
 			System.out.println("No se encuentra archivo");
-
 			e.printStackTrace();
-
 		} catch (NumberFormatException e) {
-
 			System.out.println("No se pudo convertir a entero");
-
 			e.printStackTrace();
-
 		} catch (IOException e) {
-
-			System.out.println("Error accediendo al archivo.");
-
-			e.printStackTrace();
-                        
-
+			System.out.println("Error accediendo al archivo");
+			e.printStackTrace();     
 		}
 
     int[][] c = Multiplicacion(matrizL, matriz);
@@ -188,24 +213,21 @@ public class Practica1 {
 
 	}
     
-public static int[][] Multiplicacion(int[][] a, int[][] b) {
-    int[][] c = new int[a.length][b[0].length];
-    // se comprueba si las matrices se pueden multiplicar
-    if (a[0].length == b.length) {
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < b[0].length; j++) {
-                for (int k = 0; k < a[0].length; k++) {
-                    // aquí se multiplica la matriz
-                    c[i][j] += a[i][k] * b[k][j];
+    public static int[][] Multiplicacion(int[][] a, int[][] b) {
+        int[][] c = new int[a.length][b[0].length];
+        // se comprueba si las matrices se pueden multiplicar
+        if (a[0].length == b.length) {
+            for (int i = 0; i < a.length; i++) {
+                for (int j = 0; j < b[0].length; j++) {
+                    for (int k = 0; k < a[0].length; k++) {
+                        // aquí se multiplica la matriz
+                        c[i][j] += a[i][k] * b[k][j];
+                    }
                 }
             }
         }
-    }
-    /**
-     * si no se cumple la condición se retorna una matriz vacía
-     */
     return c;
-}   
+    }   
     
 
     
