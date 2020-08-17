@@ -55,71 +55,54 @@ public class Practica1 {
     }
     
     public static void Descifrado(){
+        
         Scanner cadenas = new Scanner(System.in);
         Scanner entrada = new Scanner(System.in);
-        String direccion;
+        String direccion,mat2="";
+        int [][] matriz1;
+        int aa1= 0;
         try {
-         // Apertura del fichero y creacion de BufferedReader para poder
-         // hacer una lectura comoda (disponer del metodo readLine()).
-         System.out.print("Ingrese la dirección de la matriz a descifrar (sin la extensión): ");
-         direccion = cadenas.nextLine();
-         File archivo = new File ("archivos/" + direccion + ".txt");
-         FileReader fr = new FileReader (archivo);
-         BufferedReader br = new BufferedReader(fr);
-
-         // Lectura del archivo
-         String linea;
-         // Matriz para guardar lo que viene en el archivo.txt
-         int [][] matriz;
-         int filas = 0;
-         int columnas = 0;
-         // Variable para guardar la cadena como tal
-         String cadena_archivo = "";
-         // La matriz va a tener la misma cantidad de columnas por fila.
-         // Con un split podemos separar un string por un caracter 
-         // en especifico, en este caso sabemo que vienen con ","
-         while((linea=br.readLine())!=null){
-            String [] fila = linea.split(",");
-            // Ahora fila es un vector de tipo String
-            // Separados por comas.
-            // En esta variable se esta replicando el contenido
-            // Del archivo y en mi caso utilizare un salto de linea
-            cadena_archivo += linea + "\n";
-            // Si imprimimos este vector tendremos la fila separada por comas
-            for(int i = 0; i < fila.length; i++){
-                System.out.print(fila[i] + " ");
+            String texto = "";
+            System.out.print("Ingrese el nombre del Primer archivo (incluya la extension del archivo): ");
+            direccion = cadenas.nextLine();
+            BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion+".txt"));
+            String bfRead;
+            String temp ="";
+            while((bfRead = br.readLine()) != null){
+                temp = temp + bfRead;
+                aa1++;
             }
-            // Luego de imprimir la fila, podemos darnos cuenta que
-            // El tamaño del arreglo es igual a la cantidad de columnas
-            // entonces
-            columnas = fila.length;
-            // En este caso estaremos leyendo linea por linea
-            // Por cada linea, la fila aumenta en 1 y al terminar
-            // de leer el archivo, filas tendira la cantidad total
-            // de filas en el archivo, justo para la matriz.
-            filas = filas + 1;
-         }
-            System.out.println("");
-          System.out.println("Las columnas son: " + columnas);
-          System.out.println("Las filas son: " + filas);
-      fr.close();
-      // Con las dimensiones que encontramos, podemos definir nuestra matriz
-      matriz = new int[filas][columnas];
-          System.out.println("");
-      // Hasta este punto tenemos la matriz del tamaño del archivo
-      // Y tambien tenemos una variable con el contenido del archivo
-          System.out.println(cadena_archivo);
-      
-      }
-      catch(Exception e){
+            texto=temp;
+            br.close();
+            mat2=texto;
+        }
+        catch(Exception e){
          e.printStackTrace();
-      }
+        }
+        String[] textElements1 = mat2.split(",");
+        System.out.println("La matris dada es de: " + aa1 + " * "+ textElements1.length/aa1);
+        int u=0;
+        int [][] mattriz1 = new int [aa1][textElements1.length/aa1];
+        for(int i=0;i<aa1;i++){
+            for(int j=0;j<textElements1.length/aa1;j++){
+                mattriz1[i][j]=Integer.valueOf(textElements1[u]);
+                //System.out.println(" " + valoi[i][j]);
+                u++;
+            }
+        }
+        System.out.println(Arrays.deepToString(mattriz1));
+        
+      /*int [] matri2= new int [textElements1.length] ;
+      for (int i = 0; i<textElements1.length;i++){
+          matri2[i] = Integer.valueOf(textElements1[i]);
+      }*/
+        
         String direccion2,mat1="";
         int [][] matriz;
         int aa= 0;
         try {
             String texto = "";
-            System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
+            System.out.print("Ingrese el nombre del Segundo archivo (incluya la extension del archivo): ");
             direccion2 = cadenas.nextLine();
             BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion2+".txt"));
             String bfRead;
@@ -164,7 +147,37 @@ public class Practica1 {
 
                 System.out.println();
             }
-            entrada.close();
+        int aas; 
+        int [][]inveInt=new int [d.length][d.length];
+        for (int i =0;i<d.length;i++){
+                for (int j=0;j<d.length;j++){
+                    aas = (int)(d[i][j]);
+                    inveInt[i][j]=aas;
+                }
+        }
+         System.out.println(Arrays.deepToString(inveInt));
+        System.out.println("La Multiplicacion es: ");
+         
+        int [][]multiM=new int [d.length][d.length];
+        int uuu;
+        uuu= multiM.length*multiM[0].length;
+        int [][] Multipli = new int [mattriz1.length][d.length];
+        Multipli = multiMa(mattriz1, inveInt); 
+        System.out.println(Arrays.deepToString(Multipli));  
+        
+        byte ascii[]= new byte [uuu];
+        int ww;
+        ww=0;
+         for(int i=0;i<Multipli.length;i++){
+            for(int j=0;j<Multipli[0].length;j++){
+               ascii[ww]=(byte)Multipli[i][j];
+                ww++;
+            }
+        }
+        String ssl = new String(ascii);
+        System.out.println(ssl);
+        
+                
         }	
        //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -442,6 +455,21 @@ public class Practica1 {
         
         return (txt + "," + a);
     }
-    
+    public static int [][] multiMa(int [][] codig,int [][]valoi){
+        int MatriR [][]= new int [codig.length][valoi.length];     
+        for(int i = 0; i < codig.length;i++){
+            for(int j = 0; j<valoi[0].length;j++){
+                int suma =0;
+                for(int k=0;k<codig[0].length;k++){
+                    suma+= codig[i][k]*valoi[k][j];
+                    if(k == valoi[0].length-1){
+                        // System.out.print(suma);
+                    }
+                    MatriR[i][j]=suma;
+                }//System.out.println();
+            }
+        }
+        return MatriR; 
+    }
     
 }
