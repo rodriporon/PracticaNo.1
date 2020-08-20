@@ -132,7 +132,7 @@ public class Practica1 {
             for(int i=0; i<n; i++){
                 for(int j=0; j<n; j++){
                     a[i][j] = matri2[cc];
-                    System.out.print(a[i][j]+"  ");
+                    System.out.print(a[i][j]+ " ");
                     cc++;
                 } System.out.println();
             }
@@ -160,31 +160,17 @@ public class Practica1 {
         int [][] c = MultiplicacionDoble(d, mattriz1);
         System.out.println(Arrays.deepToString(c));
         
-        int DimVectorASCII = d.length*d.length;
-        int[][] ResultMult = new int [mattriz1.length][d.length];
+        int DimVectorASCII = c.length*c[0].length;
         byte VectorASCII[] = new byte [DimVectorASCII];
         int ContASCII = 0;
-        for (int i = 0; i < ResultMult.length; i++) {
-            for (int j = 0; j < ResultMult[0].length; j++) {
-                VectorASCII[ContASCII] = (byte) ResultMult[i][j];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) { //cuenta las filas columnas se multiplican, se agregan en un vector, luego se convierten en bytes, y se saca el resulta ASCII
+                VectorASCII[ContASCII] = (byte) c[i][j];
                 ContASCII++;
             }
         }  
         String Fas = new String (VectorASCII);
-        System.out.println("La frase descifrada es:");
-        System.out.println(Fas);
-        int Nn = c.length*c[0].length;
-        byte ascii[]= new byte [Nn];
-        int cou;
-        cou=0;
-         for(int i=0;i<c.length;i++){
-            for(int j=0;j<c[0].length;j++){       //cuenta las filas columnas se multiplican, se agregan en un vector, luego se convierten en bytes, y se saca el resulta acsii
-               ascii[cou]=(byte)c[i][j];
-                cou++;
-            }
-        }
-        String ssl = new String(ascii);
-        System.out.println("La frase desencriptada es : "+ssl);
+        System.out.println("La frase desencriptada es : " + Fas);
                 
         }	
        //-----------------------------------------------------------------------------------------------------------------------------------
@@ -306,11 +292,8 @@ public class Practica1 {
         } else if (contador % 17 == 0) {
             b = contador / 17;
             a = contador / b;
-        } else if (contador % 19 ==0) {
-            b = contador / 19;
-            a = contador / b;
         } else {
-            System.out.println("La frase excede el límite de carácteres");
+            System.out.println("La frase no contiene multiplos permitidos");
         }
         System.out.println("El multiplo es: " + a + " y n es: " + b);
         
@@ -396,18 +379,7 @@ public class Practica1 {
     
 
     
-    public static boolean Primo(int numero){
-        int contadorP = 2;
-        boolean primo = true;
-        while ((primo) && (contadorP != numero)) {
-            if (numero % contadorP == 0) {
-                primo = false;
-                contadorP++;
-            }
-        }
-        return primo;
-    }
-        
+
     public static void Multiplo(int contador){
         int a = 1;
         int b = 1;
