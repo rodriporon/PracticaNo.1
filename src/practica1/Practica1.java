@@ -157,7 +157,7 @@ public class Practica1 {
         }
         System.out.println(Arrays.deepToString(inveInt));
         System.out.println("La Multiplicacion es: ");
-        double[][] c = MultiplicacionDoble(d, mattriz1);
+        int [][] c = MultiplicacionDoble(d, mattriz1);
         System.out.println(Arrays.deepToString(c));
         
         int DimVectorASCII = d.length*d.length;
@@ -173,7 +173,18 @@ public class Practica1 {
         String Fas = new String (VectorASCII);
         System.out.println("La frase descifrada es:");
         System.out.println(Fas);
-     
+        int Nn = c.length*c[0].length;
+        byte ascii[]= new byte [Nn];
+        int cou;
+        cou=0;
+         for(int i=0;i<c.length;i++){
+            for(int j=0;j<c[0].length;j++){       //cuenta las filas columnas se multiplican, se agregan en un vector, luego se convierten en bytes, y se saca el resulta acsii
+               ascii[cou]=(byte)c[i][j];
+                cou++;
+            }
+        }
+        String ssl = new String(ascii);
+        System.out.println("La frase desencriptada es : "+ssl);
                 
         }	
        //-----------------------------------------------------------------------------------------------------------------------------------
@@ -453,20 +464,24 @@ public class Practica1 {
         return (txt + "," + a);
     }
     
-    public static double[][] MultiplicacionDoble(double[][] a, int[][] b) {
+    public static int [][] MultiplicacionDoble(double[][] a, int[][] b) {
         double[][] c = new double[a.length][b[0].length];
+        int [][]Matr=new int [a.length][b[0].length]; 
         // se comprueba si las matrices se pueden multiplicar
+        float s;
         if (a[0].length == b.length) {
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < b[0].length; j++) {
                     for (int k = 0; k < a[0].length; k++) {
                         // aquí se multiplica la matriz
                         c[i][j] += a[i][k] * b[k][j];
+                        s = (float)c[i][j];    //Esta linea 
+                        Matr[i][j]=Math.round(s);
                     }
                 }
             }
         }
-    return c;
+    return Matr;
     }   
     
 }
