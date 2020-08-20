@@ -63,7 +63,7 @@ public class Practica1 {
         int aa1= 0;
         try {
             String texto = "";
-            System.out.print("Ingrese el nombre del Primer archivo (incluya la extension del archivo): ");
+            System.out.print("Ingrese el nombre del Primer archivo (SIN INCLUIR LA EXTENSION DEL ARCHIVO): ");
             direccion = cadenas.nextLine();
             BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion+".txt"));
             String bfRead;
@@ -80,7 +80,7 @@ public class Practica1 {
          e.printStackTrace();
         }
         String[] textElements1 = mat2.split(",");
-        System.out.println("La matris dada es de: " + aa1 + " * "+ textElements1.length/aa1);
+        System.out.println("La matriz dada es de: " + aa1 + " * "+ textElements1.length/aa1);
         int u=0;
         int [][] mattriz1 = new int [aa1][textElements1.length/aa1];
         for(int i=0;i<aa1;i++){
@@ -102,7 +102,7 @@ public class Practica1 {
         int aa= 0;
         try {
             String texto = "";
-            System.out.print("Ingrese el nombre del Segundo archivo (incluya la extension del archivo): ");
+            System.out.print("Ingrese el nombre del Segundo archivo (SIN INCLUIR LA EXTENSION DEL ARCHIVO): ");
             direccion2 = cadenas.nextLine();
             BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion2+".txt"));
             String bfRead;
@@ -155,28 +155,25 @@ public class Practica1 {
                     inveInt[i][j]=aas;
                 }
         }
-         System.out.println(Arrays.deepToString(inveInt));
+        System.out.println(Arrays.deepToString(inveInt));
         System.out.println("La Multiplicacion es: ");
-         
-        int [][]multiM=new int [d.length][d.length];
-        int uuu;
-        uuu= multiM.length*multiM[0].length;
-        int [][] Multipli = new int [mattriz1.length][d.length];
-        Multipli = multiMa(mattriz1, inveInt); 
-        System.out.println(Arrays.deepToString(Multipli));  
+        double[][] c = MultiplicacionDoble(d, mattriz1);
+        System.out.println(Arrays.deepToString(c));
         
-        byte ascii[]= new byte [uuu];
-        int ww;
-        ww=0;
-         for(int i=0;i<Multipli.length;i++){
-            for(int j=0;j<Multipli[0].length;j++){
-               ascii[ww]=(byte)Multipli[i][j];
-                ww++;
+        int DimVectorASCII = d.length*d.length;
+        int[][] ResultMult = new int [mattriz1.length][d.length];
+        byte VectorASCII[] = new byte [DimVectorASCII];
+        int ContASCII = 0;
+        for (int i = 0; i < ResultMult.length; i++) {
+            for (int j = 0; j < ResultMult[0].length; j++) {
+                VectorASCII[ContASCII] = (byte) ResultMult[i][j];
+                ContASCII++;
             }
-        }
-        String ssl = new String(ascii);
-        System.out.println(ssl);
-        
+        }  
+        String Fas = new String (VectorASCII);
+        System.out.println("La frase descifrada es:");
+        System.out.println(Fas);
+     
                 
         }	
        //-----------------------------------------------------------------------------------------------------------------------------------
@@ -322,9 +319,9 @@ public class Practica1 {
                 String direcc;
                 int[][] matrizL = null;
 		try {
-                        System.out.print("Ingrese el nombre del archivo (incluya la extension del archivo): ");
+                        System.out.print("Ingrese el nombre del archivo (NO INCLUYA LA EXTENSION DEL ARCHIVO): ");
                         direcc = cadenas.nextLine();
-			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc));
+			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc + ".txt"));
 
 			//Primera linea nos dice longitud de la matriz
 			String linea = Integer.toString(a);
@@ -455,21 +452,21 @@ public class Practica1 {
         
         return (txt + "," + a);
     }
-    public static int [][] multiMa(int [][] codig,int [][]valoi){
-        int MatriR [][]= new int [codig.length][valoi.length];     
-        for(int i = 0; i < codig.length;i++){
-            for(int j = 0; j<valoi[0].length;j++){
-                int suma =0;
-                for(int k=0;k<codig[0].length;k++){
-                    suma+= codig[i][k]*valoi[k][j];
-                    if(k == valoi[0].length-1){
-                        // System.out.print(suma);
+    
+    public static double[][] MultiplicacionDoble(double[][] a, int[][] b) {
+        double[][] c = new double[a.length][b[0].length];
+        // se comprueba si las matrices se pueden multiplicar
+        if (a[0].length == b.length) {
+            for (int i = 0; i < a.length; i++) {
+                for (int j = 0; j < b[0].length; j++) {
+                    for (int k = 0; k < a[0].length; k++) {
+                        // aquí se multiplica la matriz
+                        c[i][j] += a[i][k] * b[k][j];
                     }
-                    MatriR[i][j]=suma;
-                }//System.out.println();
+                }
             }
         }
-        return MatriR; 
-    }
+    return c;
+    }   
     
 }
