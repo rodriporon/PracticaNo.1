@@ -425,7 +425,7 @@ public class Practica1 {
             String temp ="";
             String bfRead;
             while((bfRead = bf.readLine()) != null){
-                temp = temp + bfRead;
+                temp = temp + bfRead + ",";
                 a++;
             }
             txt=temp;
