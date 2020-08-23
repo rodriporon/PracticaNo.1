@@ -347,7 +347,7 @@ public class Practica1 {
                     writer.println("<div class=\"content\">");
 			writer.println("<section>");
                             writer.println("<h3>Rodrigo Antonio Porón De León</h3>");
-                                writer.println("<p>Laboratorio de Introducción a la Programación de Computadoras</p>");
+                                writer.println("<p>Laboratorio de Introducción a la Programación y Computación</p>");
                                 writer.println("<p>Sección D</p>");
 			writer.println("</section>");
                 writer.println("</div>");
@@ -600,7 +600,7 @@ public class Practica1 {
     System.out.println(Arrays.deepToString(c));
     
     
-    // IMPRIMIR ----------------------------------------------------------------
+//REPORTE _____________________________________________________________________________
     
     try {
         String ruta = "ReporteCifrado.html";
@@ -735,7 +735,7 @@ public class Practica1 {
                     writer.println("<div class=\"content\">");
 			writer.println("<section>");
                             writer.println("<h3>Rodrigo Antonio Porón De León</h3>");
-                                writer.println("<p>Laboratorio de Introducción a la Programación de Computadoras</p>");
+                                writer.println("<p>Laboratorio de Introducción a la Programación y Computación</p>");
                                 writer.println("<p>Sección D</p>");
 			writer.println("</section>");
                 writer.println("</div>");
@@ -912,11 +912,11 @@ public class Practica1 {
     }
     public static double [] Resolucion(double[][] x, double[] y, int z){
          
-        for (int i = 0; i <z; i++) {
+        for (int i = 0; i < z; i++) {
             double piv, c = 0;
             //Pivote a usar:
             piv = x[i][i];
-           System.out.println(Double.toString(1/piv) + " * Fila " + (i + 1)); //Los pasos que se van realizando se imprimen
+            System.out.println(Double.toString(1/piv) + " * Fila " + (i + 1)); //Los pasos que se van realizando se imprimen
             System.out.println();
             for (int j = 0; j <z; j++) {
                 //Se comienza a convertir a 1 el pivote que se ha seleccionado.
@@ -957,6 +957,144 @@ public class Practica1 {
                 }
             }
         }
+        
+// REPORTE ------------------------------------------------------------------------------------------------
+
+        try {
+        String ruta = "ReporteGaussJordan.html";
+        PrintWriter writer = new PrintWriter(ruta, "UTF-8");
+        writer.println("<!DOCTYPE HTML>");
+        writer.println("<html>");
+	writer.println("<head>");
+		writer.println("<title>Reporte GaussJordan IPC 1</title>");
+		writer.println("<meta charset=\"utf-8\" />");
+		writer.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />");
+		writer.println("<meta name=\"description\" content=\"\" />");
+		writer.println("<meta name=\"keywords\" content=\"\" />");
+		writer.println("<link rel=\"stylesheet\" href=\"assets/css/main.css\" />");
+	writer.println("</head>");
+	writer.println("<body class=\"is-preload\">");
+                writer.println("<header id=\"header\">");
+                
+                
+			writer.println("<a class=\"logo\" href=\"ReporteDescifrado.html\">Reporte Descifrado</a>");
+                        writer.println("<nav>");
+                        writer.println("<a href = \"#menu\"> Menú </a>");
+                        writer.println("</nav>");
+                        
+                	writer.println("<nav id=\"menu\">");
+				writer.println("<ul class=\"links\">");
+					writer.println("<li><a href=\"ReporteDescifrado.html\">Inicio</a></li>");
+					writer.println("<li><a href=\"ReporteCifrado.html\">Cifrado</a></li>");
+					writer.println("<li><a href=\"ReporteGaussJordan.html\">Gauss Jordan</a></li>");
+				writer.println("</ul>");
+			writer.println("</nav>");        
+                        
+                        
+                writer.println("</header>");
+                writer.println("<section id=\"banner3\">");
+				writer.println("<div class=\"inner\">");
+					writer.println("<h1>GAUSS JORDAN</h1>");
+					writer.println("<p>Un reporte generado totalmente en java<br />");
+					writer.println("</div>");
+				writer.println("<video autoplay loop muted playsinline src=\"images/banner2.mp4\"></video>");
+			writer.println("</section>");
+                        
+            writer.println("<section class = \"wrapper\">");
+                writer.println("<div class = \"inner\">");
+                    writer.println("<header class = \"special\">");
+            writer.println("<h3>");
+            writer.println("La ruta del archivo que contiene el sistema de ecuaciones:");
+            writer.println("</h3>");
+            writer.println("<p>");
+            writer.println("<code>");
+            writer.println(direccionGauss);
+            writer.println("</code>");
+            writer.println("</p>");
+            writer.println("La matriz que contiene el sistema de ecuaciones :");//ACÁ QUIERO ENSEÑAR LA MATRIZ QUE INGRESAMOS
+            
+            writer.println("<div class = \"table-wrapper\">");
+            writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");	
+            for(int i = 0; i < aa1; i++)
+            {
+                writer.println("<tr>");
+                for(int j = 0; j < textElements1.length/aa1; j++){
+                    writer.print("<th>");
+                    writer.print(mattriz1[i][j]);
+                    writer.print("</th>");
+                    
+                }
+                writer.println("</tr>");
+            }
+            writer.println("</tbody>");
+            writer.println("</table>");
+            writer.println("</div>");
+            
+            
+
+            
+            writer.println("<h3>");
+            writer.println("Los pasos para solucionar el sistema de ecuaciones:");//DESPUÉS DE ESTO ENSEÑO LOS PASOS, EN FILA NO EN TABLA
+            writer.println("</h3>");
+            
+  
+            //------aca irian los pasos
+            
+            
+            
+            writer.println("<h3>");
+            writer.println("El resultado del sistema de ecuaciones es:");
+            writer.println("</h3>");
+            
+            writer.println("<b>");
+            writer.println();//ACÁ MUESTRO LOS RESULTADOS
+            writer.println("</b>");
+            
+            writer.println("</header>");
+            writer.println("</div>");
+            writer.println("</section>");
+           
+            
+            
+            writer.println("<footer id=\"footer\">");
+		writer.println("<div class=\"inner\">");
+                    writer.println("<div class=\"content\">");
+			writer.println("<section>");
+                            writer.println("<h3>Rodrigo Antonio Porón De León</h3>");
+                                writer.println("<p>Laboratorio de Introducción a la Programación y Computación</p>");
+                                writer.println("<p>Sección D</p>");
+			writer.println("</section>");
+                writer.println("</div>");
+                writer.println("</div>");
+            writer.println("</footer>");
+            
+            
+            			writer.println("<script src=\"assets/js/jquery.min.js\"></script>");
+			writer.println("<script src=\"assets/js/browser.min.js\"></script>");
+			writer.println("<script src=\"assets/js/breakpoints.min.js\"></script>");
+			writer.println("<script src=\"assets/js/util.js\"></script>");
+			writer.println("<script src=\"assets/js/main.js\"></script>");
+            writer.println("</body>");
+            writer.println("</html>");
+            
+            
+            writer.close();
+        
+        
+        
+    } catch (Exception e){
+        e.printStackTrace();
+    }        
+        
+        
+        
+        
         return y;
+        
+  
+        
+        
+        
     }  
 }
