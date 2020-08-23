@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Practica1 {
-
+    
+    public static String direccionGauss;
+    public static String frase;
+    
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner cadenas = new Scanner(System.in);
@@ -26,7 +30,7 @@ public class Practica1 {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
-                    String frase;
+                    
                     char[] caracteres;
                     System.out.println("CIFRAR");
                     System.out.print("Ingrese la frase a cifrar: ");
@@ -42,14 +46,18 @@ public class Practica1 {
                     break;
                 case 3:
                     System.out.println("GAUSS-JORDAN");
+                    System.out.print("Ingrese la ruta del archivo: ");
+                    direccionGauss = cadenas.nextLine(); 
+                    GaussJordan();
+                    break;
+                case 4: 
+                    System.out.println("Adiós :D");
                     break;
                 default:
                     System.out.println("Opción no válida");
             }
         }while (opcion != 4);             
-        
-        
-        
+
         //EscribirDocumento();
         //LeerDocumento();
     }
@@ -63,13 +71,13 @@ public class Practica1 {
         int aa1= 0;
         try {
             String texto = "";
-            System.out.print("Ingrese el nombre del Primer archivo (SIN INCLUIR LA EXTENSION DEL ARCHIVO): ");
+            System.out.print("Ingrese la ruta del primer archivo: ");
             direccion = cadenas.nextLine();
-            BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion+".txt"));
+            BufferedReader br = new BufferedReader(new FileReader(direccion));
             String bfRead;
             String temp ="";
             while((bfRead = br.readLine()) != null){
-                temp = temp + bfRead;
+                temp = temp + bfRead + ",";
                 aa1++;
             }
             texto=temp;
@@ -102,13 +110,13 @@ public class Practica1 {
         int aa= 0;
         try {
             String texto = "";
-            System.out.print("Ingrese el nombre del Segundo archivo (SIN INCLUIR LA EXTENSION DEL ARCHIVO): ");
+            System.out.print("Ingrese la ruta del segundo archivo: ");
             direccion2 = cadenas.nextLine();
-            BufferedReader br = new BufferedReader(new FileReader("archivos/" + direccion2+".txt"));
+            BufferedReader br = new BufferedReader(new FileReader(direccion2));
             String bfRead;
             String temp ="";
             while((bfRead = br.readLine()) != null){
-                temp = temp + bfRead;
+                temp = temp + bfRead + ",";
                 aa++;
             }
             texto=temp;
@@ -155,7 +163,7 @@ public class Practica1 {
                     inveInt[i][j]=aas;
                 }
         }
-        System.out.println(Arrays.deepToString(inveInt));
+       // System.out.println(Arrays.deepToString(inveInt));
         System.out.println("La Multiplicacion es: ");
         int [][] c = MultiplicacionDoble(d, mattriz1);
         System.out.println(Arrays.deepToString(c));
@@ -296,7 +304,6 @@ public class Practica1 {
             System.out.println("La frase no contiene multiplos permitidos");
         }
         System.out.println("El multiplo es: " + a + " y n es: " + b);
-        
         matriz = new int[a][b];
         int ubi = 0, pos = 0, gg = 0;
         for (int i = 0; i < a; i++) {
@@ -313,9 +320,9 @@ public class Practica1 {
                 String direcc;
                 int[][] matrizL = null;
 		try {
-                        System.out.print("Ingrese el nombre del archivo (NO INCLUYA LA EXTENSION DEL ARCHIVO): ");
+                        System.out.print("Ingrese la ruta del archivo: ");
                         direcc = cadenas.nextLine();
-			BufferedReader br = new BufferedReader(new FileReader("archivos/" + direcc + ".txt"));
+			BufferedReader br = new BufferedReader(new FileReader(direcc));
 
 			//Primera linea nos dice longitud de la matriz
 			String linea = Integer.toString(a);
@@ -358,6 +365,10 @@ public class Practica1 {
 
     int[][] c = Multiplicacion(matrizL, matriz);
     System.out.println(Arrays.deepToString(c));
+    
+    
+    // IMPRIMIR ----------------------------------------------------------------
+    
 
 	}
     
@@ -456,4 +467,106 @@ public class Practica1 {
     return Matr;
     }   
     
+    
+    public static void GaussJordan(){
+        double[][] MatrizGauss;
+        int[][] Matriz1;
+        String Matriz;
+        Matriz = Leer(direccionGauss);
+        Matriz.split(",");
+        String[] ElementosMatriz = Matriz.split(",");
+        int SinIdentidad = ElementosMatriz.length -1;
+        int ConverSinIden = Integer.valueOf(ElementosMatriz[SinIdentidad]);
+        int Cant = SinIdentidad/ConverSinIden, Op = 0;
+        Matriz1 = new int[ConverSinIden][Cant];
+        MatrizGauss = new double[ConverSinIden][Cant];
+        int[] VectorDim;
+        VectorDim = new int[ConverSinIden * Cant]; 
+        for (int i = 0; i < ConverSinIden; i++) {
+            for (int j = 0; j < Cant; j++) {
+                Matriz1[i][j] = Integer.valueOf(ElementosMatriz[Op]);
+                VectorDim[Op] = Matriz1[i][j];
+                MatrizGauss[i][j] = Matriz1[i][j];
+                Op++;
+            }
+        }
+        System.out.println(Arrays.deepToString(Matriz1));
+        System.out.println("La matriz es de " + ConverSinIden + "x" + Cant);
+        OperacionGaussJordan(Matriz1);
+    }
+    
+    public static void OperacionGaussJordan(int [][]Matriz){
+        
+        //Determinar las dimensiones
+        double Dim[][] = new double[Matriz.length][Matriz.length];
+        double Resu[] = new double[Matriz.length];
+        int count = Matriz.length; 
+        for (int i = 0; i < count; i++) {
+
+                for (int j = 0; j < count; j++) {
+                    //Matriz aumentada
+                    Dim[i][j] = Matriz[i][j];
+                }
+                Resu[i] = Matriz[i][count];
+            }
+            System.out.println("Matriz cuadrada" + Arrays.deepToString(Dim));
+            System.out.println("Matriz aumentada" + Arrays.toString(Resu));
+            Resu = Practica1.Resolucion(Dim, Resu, count);
+            
+            System.out.println("Los resultados son:");
+            System.out.println("X = " + Resu[0]);
+            System.out.println("Y = " + Resu[1]);
+            System.out.println("Z = " + Resu[2]);
+            System.out.println();
+            
+    }
+    public static double [] Resolucion(double[][] x, double[] y, int z){
+         
+        for (int i = 0; i <z; i++) {
+            double piv, c = 0;
+            //Pivote a usar:
+            piv = x[i][i];
+           System.out.println(Double.toString(1/piv) + " * Fila " + (i + 1)); //Los pasos que se van realizando se imprimen
+            System.out.println();
+            for (int j = 0; j <z; j++) {
+                //Se comienza a convertir a 1 el pivote que se ha seleccionado.
+                x[i][j] = ((x[i][j]) / piv);
+            }
+            y[i] = ((y[i]) / piv);
+
+            // Sección de la matriz aumentada
+            // Pasos
+            for (int j = 0; j < z; j++) {
+                for (int k = 0; k < z; k++) {
+                   System.out.println(Double.toString(x[j][k]));
+                }
+                System.out.println("(" + Double.toString(y[j]) + ")");
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println();
+            for (int p = 0; p <z; p++) {
+                if (i != p) {
+                    c = x[p][i];
+                    System.out.println(Double.toString(c) + " * Fila " + (i + 1) + " + Fila " + (p + 1));// 
+                    System.out.println();
+                    for (int q = 0; q <z; q++) {
+                        x[p][q] = x[p][q] - c * x[i][q]; // Se hacen las operaciones entre filas
+                    }
+                    y[p] = y[p] - c * y[i];
+                    for (int j = 0; j < z; j++) {
+                        for (int k = 0; k < z; k++) {
+                            System.out.println(Double.toString(x[j][k]));
+                        }
+                        System.out.println("(" + Double.toString(y[j]) + ")");
+                        System.out.println();
+                    }
+                    System.out.println();
+                    System.out.println();
+
+                }
+            }
+        }
+        return y;
+    }  
 }
