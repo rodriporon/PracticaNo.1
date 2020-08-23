@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Reporte Descifrado IPC 1</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+<header id="header">
+<a class="logo" href="ReporteDescifrado.html">Reporte Descifrado</a>
+<nav>
+<a href = "#menu"> Menú </a>
+</nav>
+<nav id="menu">
+<ul class="links">
+<li><a href="ReporteDescifrado.html">Inicio</a></li>
+<li><a href="ReporteCifrado.html">Cifrado</a></li>
+<li><a href="ReporteGaussJordan.html">Gauss Jordan</a></li>
+</ul>
+</nav>
+</header>
+<section id="banner2">
+<div class="inner">
+<h1>DESCIFRADO</h1>
+<p>Un reporte generado totalmente en java<br />
+</div>
+<video autoplay loop muted playsinline src="images/banner2.mp4"></video>
+</section>
+<section class = "wrapper">
+<div class = "inner">
+<header class = "special">
+<h3>
+La ruta del la matriz a descifrar:
+</h3>
+<p>
+<code>
+archivos/Mensaje Intermedio.txt
+</code>
+</p>
+La matriz que ingresó:
+<div class = "table-wrapper">
+<table class = "alt">
+<tbody>
+<tr>
+<th>34240</th><th>38740</th><th>26519</th><th>32209</th><th>31180</th><th>32914</th><th>29861</th></tr>
+<tr>
+<th>37401</th><th>41173</th><th>31450</th><th>36172</th><th>39382</th><th>38955</th><th>27142</th></tr>
+<tr>
+<th>15164</th><th>17843</th><th>9332</th><th>11892</th><th>16719</th><th>16639</th><th>9371</th></tr>
+<tr>
+<th>31156</th><th>32265</th><th>27287</th><th>31004</th><th>30505</th><th>26199</th><th>28182</th></tr>
+<tr>
+<th>34617</th><th>38846</th><th>30953</th><th>38700</th><th>38339</th><th>34993</th><th>28795</th></tr>
+<tr>
+<th>30722</th><th>31816</th><th>25313</th><th>29718</th><th>29521</th><th>32531</th><th>24041</th></tr>
+<tr>
+<th>36327</th><th>39924</th><th>28291</th><th>35120</th><th>31346</th><th>36373</th><th>33054</th></tr>
+</tbody>
+</table>
+</div>
+<h3>
+La ruta de la matriz cuadrada:
+</h3>
+<p>
+<code>
+archivos/Llave Intermedia.txt
+</code>
+</p>
+La matriz cuadrada que ingresó es la siguiente:
+<div class = "table-wrapper">
+<table class = "alt">
+<tbody>
+<tr>
+<th>38</th><th>74</th><th>55</th><th>62</th><th>42</th><th>70</th><th>5</th></tr>
+<tr>
+<th>65</th><th>47</th><th>28</th><th>96</th><th>39</th><th>58</th><th>99</th></tr>
+<tr>
+<th>23</th><th>4</th><th>1</th><th>71</th><th>6</th><th>45</th><th>18</th></tr>
+<tr>
+<th>19</th><th>34</th><th>76</th><th>21</th><th>73</th><th>44</th><th>56</th></tr>
+<tr>
+<th>86</th><th>29</th><th>36</th><th>17</th><th>53</th><th>93</th><th>87</th></tr>
+<tr>
+<th>27</th><th>59</th><th>57</th><th>68</th><th>3</th><th>43</th><th>89</th></tr>
+<tr>
+<th>31</th><th>94</th><th>90</th><th>51</th><th>14</th><th>72</th><th>12</th></tr>
+</tbody>
+</table>
+</div>
+<h3>
+La inversa de la matriz cuadrada es:
+</h3>
+<div class = "table-wrapper">
+<table class = "alt">
+<tbody>
+<tr>
+<th>-0.062437750457023496</th><th>0.05618422916293139</th><th>-0.005254067020742731</th><th>4.6949044481976347E-4</th><th>-0.004638443771598491</th><th>-0.0619724021571833</th><th>0.06144335056139607</th></tr>
+<tr>
+<th>0.04763509458856225</th><th>-0.01680591083439612</th><th>-0.021439071747326392</th><th>-0.013468092263109226</th><th>0.0025106584948833832</th><th>0.03079357221462995</th><th>-0.032777421525710136</th></tr>
+<tr>
+<th>-0.05911240056329677</th><th>0.0287880674382438</th><th>0.009352821254344985</th><th>0.015391902084813662</th><th>-0.008483201526340368</th><th>-0.03918384900696509</th><th>0.05338726012617307</th></tr>
+<tr>
+<th>-0.013367355868270467</th><th>0.015388070192302131</th><th>0.009893791682330321</th><th>0.0037396542089773352</th><th>-0.009482737735360264</th><th>-0.01309550565039389</th><th>0.012200594181680327</th></tr>
+<tr>
+<th>0.023346055206668156</th><th>-0.002825274595492124</th><th>-0.006242311499425932</th><th>0.007270248076455692</th><th>-0.001573036782463175</th><th>0.0028378316848594264</th><th>-0.0206260996874721</th></tr>
+<tr>
+<th>0.041042388599432635</th><th>-0.04631390325185028</th><th>0.013437526579801818</th><th>-0.0056831918106117684</th><th>0.015516552835628243</th><th>0.03996389888931907</th><th>-0.037539946329601094</th></tr>
+<tr>
+<th>0.014818818397406312</th><th>-0.013626521366406512</th><th>-0.004024834962663096</th><th>-0.0014283955045459296</th><th>0.004977360921981053</th><th>0.025319626156284032</th><th>-0.021592368937659097</th></tr>
+</tbody>
+</table>
+</div>
+<h3>
+La frase desencriptada es:
+</h3>
+<b>
+Buenos dias estrellitas, el mundo les dice: HOLA!
+</b>
+</header>
+</div>
+</section>
+<footer id="footer">
+<div class="inner">
+<div class="content">
+<section>
+<h3>Rodrigo Antonio Porón De León</h3>
+<p>Laboratorio de Introducción a la Programación de Computadoras</p>
+<p>Sección D</p>
+</section>
+</div>
+</div>
+</footer>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
