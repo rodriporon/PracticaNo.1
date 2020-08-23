@@ -327,11 +327,12 @@ public class Practica1 {
         Matriz = Leer(direccionCifrado);
         Matriz.split(",");
         String[] ElementosMatriz = Matriz.split(",");
+        
         int fila = 0;
         int longitud = ElementosMatriz.length;
-        MatrizL = new int[longitud][longitud];                            
-            for (int i = 0; i < longitud; i++){
-                for (int j = 0; j < longitud; j++) {
+        MatrizL = new int[a][a];                            
+            for (int i = 0; i < a; i++){
+                for (int j = 0; j < a; j++) {
                     MatrizL[i][j] = Integer.valueOf(ElementosMatriz[fila]);
                     fila++;         
                 }
@@ -471,10 +472,10 @@ public class Practica1 {
             writer.println("<div class = \"table-wrapper\">");
             writer.println("<table class = \"alt\">");
             writer.println("<tbody>");	
-            for(int i = 0; i < longitud; i++)
+            for(int i = 0; i < a; i++)
             {
                 writer.println("<tr>");
-                for(int j = 0; j < longitud; j++){
+                for(int j = 0; j < a; j++){
                     writer.print("<th>");
                     writer.print(MatrizL[i][j]);
                     writer.print("</th>");
