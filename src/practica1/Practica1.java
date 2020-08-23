@@ -270,6 +270,10 @@ public class Practica1 {
                         a[index[i]][l] -= pj*a[index[j]][l];
                 }
             }
+            
+            
+            
+            
         
     }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,6 +312,7 @@ public class Practica1 {
             System.out.println("La frase no contiene multiplos permitidos");
         }
         System.out.println("El multiplo es: " + a + " y n es: " + b);
+        System.out.println("La frase convertida a ASCII:");
         matriz = new int[a][b];
         int ubi = 0, pos = 0, gg = 0;
         for (int i = 0; i < a; i++) {
@@ -319,9 +324,8 @@ public class Practica1 {
             gg++;
         }
         System.out.println(Arrays.deepToString(matriz));
-        System.out.println("La matriz es multiplo de: " + a + " y n es: " + b);
         
-        
+        System.out.println("La matriz ingresada por medio de archivo:");
         int[][] MatrizL;
         String Matriz;
         Matriz = Leer(direccionCifrado);
@@ -339,8 +343,8 @@ public class Practica1 {
 
             }
                        
-                for (int i = 0; i < longitudCif; i++) {
-                    for (int j = 0; j < longitudCif; j++)
+                for (int i = 0; i < a; i++) {
+                    for (int j = 0; j < a; j++)
                             System.out.print(MatrizL[i][j] + " ");
                             System.out.println();
 			}
@@ -403,6 +407,7 @@ public class Practica1 {
 			}
 */
     int[][] c = Multiplicacion(MatrizL, matriz);
+        System.out.println("La multiplicacion de las matrices:");
     System.out.println(Arrays.deepToString(c));
     
     
@@ -423,7 +428,22 @@ public class Practica1 {
 	writer.println("</head>");
 	writer.println("<body class=\"is-preload\">");
                 writer.println("<header id=\"header\">");
+                
+                
 			writer.println("<a class=\"logo\" href=\"ReporteCifrado.html\">Reporte Cifrado</a>");
+                        writer.println("<nav>");
+                        writer.println("<a href = \"#menu\"> Menú </a>");
+                        writer.println("</nav>");
+                        
+                	writer.println("<nav id=\"menu\">");
+				writer.println("<ul class=\"links\">");
+					writer.println("<li><a href=\"ReporteCifrado.html\">Inicio</a></li>");
+					writer.println("<li><a href=\"ReporteDescifrado.html\">Descifrado</a></li>");
+					writer.println("<li><a href=\"ReporteGaussJordan.html\">Gauss Jordan</a></li>");
+				writer.println("</ul>");
+			writer.println("</nav>");        
+                        
+                        
                 writer.println("</header>");
                 writer.println("<section id=\"banner\">");
 				writer.println("<div class=\"inner\">");
@@ -437,12 +457,13 @@ public class Practica1 {
                 writer.println("<div class = \"inner\">");
                     writer.println("<header class = \"special\">");
             writer.println("<h3>");
-            writer.println("La frase que ingresó es:");
+            writer.println("La frase que ingresó:");
             writer.println("</h3>");
             writer.println("<p>");
             writer.println(frase);
             writer.println("</p>");
             writer.println("La matriz en código ASCII es:");
+            
             writer.println("<div class = \"table-wrapper\">");
             writer.println("<table class = \"alt\">");
             writer.println("<tbody>");	
@@ -486,6 +507,30 @@ public class Practica1 {
             writer.println("</tbody>");
             writer.println("</table>");
             writer.println("</div>");
+            
+            writer.println("<h3>");
+            writer.println("La frase encriptada:");
+            writer.println("</h3>");
+            
+            writer.println("<div class = \"table-wrapper\">");
+            writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");	
+            for(int i = 0; i < a; i++)
+            {
+                writer.println("<tr>");
+                for(int j = 0; j < b; j++){
+                    writer.print("<th>");
+                    writer.print(c[i][j]);
+                    writer.print("</th>");
+                    
+                }
+                writer.println("</tr>");
+            }
+            writer.println("</tbody>");
+            writer.println("</table>");
+            writer.println("</div>");
+            
+            
             
             writer.println("</header>");
             writer.println("</div>");
