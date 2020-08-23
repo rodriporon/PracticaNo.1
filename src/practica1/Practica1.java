@@ -14,11 +14,13 @@ public class Practica1 {
     
     public static String direccionGauss;
     public static String frase;
-    
+    public static String direccionCifrado;
+    public static int longitudCif = 0;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner cadenas = new Scanner(System.in);
+        Scanner cadenas2 = new Scanner(System.in);
         
         int opcion;
         do{
@@ -36,9 +38,11 @@ public class Practica1 {
                     System.out.print("Ingrese la frase a cifrar: ");
                     frase = cadenas.nextLine();
                     caracteres = frase.toCharArray();
-                    Cifrado(frase);
                     System.out.println("Son " + caracteres.length + " caracteres");
                     System.out.println("Tu frase es: " + frase);
+                    System.out.print("Ingrese la ruta del archivo para cifrar: ");
+                    direccionCifrado = cadenas2.nextLine();
+                    Cifrado();
                     break;
                 case 2:
                     System.out.println("DESCIFRAR");
@@ -269,14 +273,14 @@ public class Practica1 {
         
     }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static void Cifrado(String fraseC){
+    public static void Cifrado(){
         Scanner cadenas = new Scanner(System.in);
         int matriz[][];
         int contador = 0;
-        char[] caracteresC = fraseC.toCharArray();
+        char[] caracteresC = frase.toCharArray();
         int noC[] = new int [caracteresC.length];
         for (int m = 0; m < caracteresC.length; m++) {
-            noC[m] = fraseC.charAt(m);
+            noC[m] = frase.charAt(m);
             contador++;
         }
         
@@ -316,9 +320,41 @@ public class Practica1 {
         }
         System.out.println(Arrays.deepToString(matriz));
         System.out.println("La matriz es multiplo de: " + a + " y n es: " + b);
+        
+        
+        int[][] MatrizL;
+        String Matriz;
+        Matriz = Leer(direccionCifrado);
+        Matriz.split(",");
+        String[] ElementosMatriz = Matriz.split(",");
+        int fila = 0;
+        int longitud = ElementosMatriz.length;
+        MatrizL = new int[longitud][longitud];                            
+            for (int i = 0; i < longitud; i++){
+                for (int j = 0; j < longitud; j++) {
+                    MatrizL[i][j] = Integer.valueOf(ElementosMatriz[fila]);
+                    fila++;         
+                }
+
+            }
+                       
+                for (int i = 0; i < longitudCif; i++) {
+                    for (int j = 0; j < longitudCif; j++)
+                            System.out.print(MatrizL[i][j] + " ");
+                            System.out.println();
+			}
+			
+        
+        
+        
+        
+        
                 
-                String direcc;
+           /*     String direcc;
+                direcc = cadenas.nextLine();
+                
                 int[][] matrizL = null;
+                int longitud = 0;
 		try {
                         System.out.print("Ingrese la ruta del archivo: ");
                         direcc = cadenas.nextLine();
@@ -326,7 +362,7 @@ public class Practica1 {
 
 			//Primera linea nos dice longitud de la matriz
 			String linea = Integer.toString(a);
-			int longitud = Integer.parseInt(linea);
+			longitud = Integer.parseInt(linea);
 			matrizL = new int[longitud][longitud];
 			//Las siguientes lineas son filas de la matriz
 			linea = br.readLine();
@@ -346,11 +382,7 @@ public class Practica1 {
 			}
 			br.close();
 			//Mostramos la matriz leída
-			for (int i = 0; i < longitud; i++) {
-				for (int j = 0; j < longitud; j++)
-                                    System.out.print(matrizL[i][j] + " ");
-                                    System.out.println();
-			}
+			
                     }
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encuentra archivo");
@@ -362,13 +394,120 @@ public class Practica1 {
 			System.out.println("Error accediendo al archivo");
 			e.printStackTrace();     
 		}
-
-    int[][] c = Multiplicacion(matrizL, matriz);
+                
+                for (int i = 0; i < longitudCif; i++) {
+				for (int j = 0; j < longitudCif; j++)
+                                    System.out.print(matrizL[i][j] + " ");
+                                    System.out.println();
+			}
+*/
+    int[][] c = Multiplicacion(MatrizL, matriz);
     System.out.println(Arrays.deepToString(c));
     
     
     // IMPRIMIR ----------------------------------------------------------------
     
+    try {
+        String ruta = "ReporteCifrado.html";
+        PrintWriter writer = new PrintWriter(ruta, "UTF-8");
+        writer.println("<!DOCTYPE HTML>");
+        writer.println("<html>");
+	writer.println("<head>");
+		writer.println("<title>Reporte Cifrado IPC 1</title>");
+		writer.println("<meta charset=\"utf-8\" />");
+		writer.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />");
+		writer.println("<meta name=\"description\" content=\"\" />");
+		writer.println("<meta name=\"keywords\" content=\"\" />");
+		writer.println("<link rel=\"stylesheet\" href=\"assets/css/main.css\" />");
+	writer.println("</head>");
+	writer.println("<body class=\"is-preload\">");
+                writer.println("<header id=\"header\">");
+			writer.println("<a class=\"logo\" href=\"ReporteCifrado.html\">Reporte Cifrado</a>");
+                writer.println("</header>");
+                writer.println("<section id=\"banner\">");
+				writer.println("<div class=\"inner\">");
+					writer.println("<h1>CIFRADO</h1>");
+					writer.println("<p>Un reporte generado totalmente en java<br />");
+					writer.println("</div>");
+				writer.println("<video autoplay loop muted playsinline src=\"images/banner2.mp4\"></video>");
+			writer.println("</section>");
+                        
+            writer.println("<section class = \"wrapper\">");
+                writer.println("<div class = \"inner\">");
+                    writer.println("<header class = \"special\">");
+            writer.println("<h3>");
+            writer.println("La frase que ingresó es:");
+            writer.println("</h3>");
+            writer.println("<p>");
+            writer.println(frase);
+            writer.println("</p>");
+            writer.println("La matriz en código ASCII es:");
+            writer.println("<div class = \"table-wrapper\">");
+            writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");	
+            for(int i = 0; i < a; i++)
+            {
+                writer.println("<tr>");
+                for(int j = 0; j < b; j++){
+                    writer.print("<th>");
+                    writer.print(matriz[i][j]);
+                    writer.print("</th>");
+                    
+                }
+                writer.println("</tr>");
+            }
+            writer.println("</tbody>");
+            writer.println("</table>");
+            writer.println("</div>");
+            
+            writer.println("<h3>");
+            writer.println("La ruta del archivo que ingresó:");
+            writer.println("</h3>");
+            writer.println("<p>");
+            writer.println(direccionCifrado);
+            writer.println("</p>");
+            
+            writer.println("La matriz del archivo que ingresó es la siguiente:");
+            writer.println("<div class = \"table-wrapper\">");
+            writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");	
+            for(int i = 0; i < longitud; i++)
+            {
+                writer.println("<tr>");
+                for(int j = 0; j < longitud; j++){
+                    writer.print("<th>");
+                    writer.print(MatrizL[i][j]);
+                    writer.print("</th>");
+                    
+                }
+                writer.println("</tr>");
+            }
+            writer.println("</tbody>");
+            writer.println("</table>");
+            writer.println("</div>");
+            
+            writer.println("</header>");
+            writer.println("</div>");
+            writer.println("</section>");
+           
+            
+            
+            			writer.println("<script src=\"assets/js/jquery.min.js\"></script>");
+			writer.println("<script src=\"assets/js/browser.min.js\"></script>");
+			writer.println("<script src=\"assets/js/breakpoints.min.js\"></script>");
+			writer.println("<script src=\"assets/js/util.js\"></script>");
+			writer.println("<script src=\"assets/js/main.js\"></script>");
+            writer.println("</body>");
+            writer.println("</html>");
+            
+            
+            writer.close();
+        
+        
+        
+    } catch (Exception e){
+        e.printStackTrace();
+    }
 
 	}
     
