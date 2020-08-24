@@ -910,17 +910,17 @@ public class Practica1 {
             System.out.println();
             
     }
-    public static double [] Resolucion(double[][] x, double[] y, int z){
-         
+    public static double [] Resolucion(double[][] xi, double[] y, int z){
+        double piv = 0, c = 0; 
         for (int i = 0; i < z; i++) {
-            double piv, c = 0;
+
             //Pivote a usar:
-            piv = x[i][i];
+            piv = xi[i][i];
             System.out.println(Double.toString(1/piv) + " * Fila " + (i + 1)); //Los pasos que se van realizando se imprimen
             System.out.println();
             for (int j = 0; j <z; j++) {
                 //Se comienza a convertir a 1 el pivote que se ha seleccionado.
-                x[i][j] = ((x[i][j]) / piv);
+                xi[i][j] = ((xi[i][j]) / piv);
             }
             y[i] = ((y[i]) / piv);
 
@@ -928,7 +928,7 @@ public class Practica1 {
             // Pasos
             for (int j = 0; j < z; j++) {
                 for (int k = 0; k < z; k++) {
-                   System.out.println(Double.toString(x[j][k]));
+                   System.out.println(Double.toString(xi[j][k]));
                 }
                 System.out.println("(" + Double.toString(y[j]) + ")");
                 System.out.println();
@@ -937,16 +937,16 @@ public class Practica1 {
             System.out.println();
             for (int p = 0; p <z; p++) {
                 if (i != p) {
-                    c = x[p][i];
+                    c = xi[p][i];
                     System.out.println(Double.toString(c) + " * Fila " + (i + 1) + " + Fila " + (p + 1));// 
                     System.out.println();
                     for (int q = 0; q <z; q++) {
-                        x[p][q] = x[p][q] - c * x[i][q]; // Se hacen las operaciones entre filas
+                        xi[p][q] = xi[p][q] - c * xi[i][q]; // Se hacen las operaciones entre filas
                     }
                     y[p] = y[p] - c * y[i];
                     for (int j = 0; j < z; j++) {
                         for (int k = 0; k < z; k++) {
-                            System.out.println(Double.toString(x[j][k]));
+                            System.out.println(Double.toString(xi[j][k]));
                         }
                         System.out.println("(" + Double.toString(y[j]) + ")");
                         System.out.println();
@@ -1011,26 +1011,26 @@ public class Practica1 {
             writer.println(direccionGauss);
             writer.println("</code>");
             writer.println("</p>");
-            writer.println("La matriz que contiene el sistema de ecuaciones :");//ACÁ QUIERO ENSEÑAR LA MATRIZ QUE INGRESAMOS
+            writer.println("Acá se muestra la matriz en su forma matriz identidad:");
+
             
             writer.println("<div class = \"table-wrapper\">");
-            writer.println("<table class = \"alt\">");
-            writer.println("<tbody>");	
-            for(int i = 0; i < aa1; i++)
-            {
+            
+            
+writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");        
+            for(int i = 0; i < xi.length; i++){
                 writer.println("<tr>");
-                for(int j = 0; j < textElements1.length/aa1; j++){
-                    writer.print("<th>");
-                    writer.print(mattriz1[i][j]);
+                for (int j=0 ;j< xi.length;j++){
+                    writer.println("<th>");
+                    writer.println("<center>" +(xi[i][j])+"<center>");
                     writer.print("</th>");
-                    
                 }
-                writer.println("</tr>");
+                writer.println("</tr");
             }
             writer.println("</tbody>");
             writer.println("</table>");
-            writer.println("</div>");
-            
+            writer.println("</div>");           
             
 
             
@@ -1041,6 +1041,46 @@ public class Practica1 {
   
             //------aca irian los pasos
             
+ writer.println("<table class = \"alt\">");
+            writer.println("<tbody>");
+            writer.println("</center");
+            writer.println("Los pasos para la resolucion por el metodo de Gauss fue: ");
+           
+            for (int i = 0; i <z; i++) {
+                writer.println("<p>");
+                writer.println(Double.toString(1/piv) +" * Fila" + (i + 1));
+                writer.println("");
+                writer.println("</p>");
+                for (int j = 0; j <z; j++) {
+                    for (int k = 0; k < z; k++) {
+                        writer.println("<p>");
+                        writer.println(Double.toString(xi[j][k]));
+                        writer.println("");
+                        writer.println("</p>");
+                    }
+                
+                   // writer.println("<p>" + Double.toString(res[j]) + "</p>");
+                }
+                    writer.println("\n\n");
+                    for(int x = 0; x < z; x++){
+                        writer.println("<p>"+"-" + Double.toString(c) + " * Fila" + (i + 1) + "+ fila" + (x + 1) +"</p>");
+                    
+                    for (int jj = 0; jj < z; jj++) {
+                       
+                        for (int kk = 0; kk < z; kk++) {
+                            writer.println("<p>"+Double.toString(xi[jj][kk]) +"</p>");
+                        }
+                        writer.println("<p>" + Double.toString(y[jj]) + "</p>");
+                    }
+                    writer.println("\n\n");
+                
+
+                }
+            }
+            writer.println("</tbody>");
+            writer.println("</table>");
+                      
+            
             
             
             writer.println("<h3>");
@@ -1049,14 +1089,22 @@ public class Practica1 {
             
             writer.println("<b>");
             writer.println();//ACÁ MUESTRO LOS RESULTADOS
+            
+            
+            
+            writer.println("X = " + y[0] + "   ");
+            writer.println("Y = " + y[1] + "   ");
+            writer.println("Z = " + y[2] + "   ");
+            
             writer.println("</b>");
             
             writer.println("</header>");
             writer.println("</div>");
             writer.println("</section>");
            
-            
-            
+            writer.println(y[0]);
+            writer.println(y[1]);
+            writer.println(y[2]);
             writer.println("<footer id=\"footer\">");
 		writer.println("<div class=\"inner\">");
                     writer.println("<div class=\"content\">");
